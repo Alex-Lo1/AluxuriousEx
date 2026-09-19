@@ -65,48 +65,108 @@ body {
   color: var(--blush-pink);
 }
 
-/* 2. HEADER */
+/* ==========================================
+   HEADER & PARTIAL LEFT SLIDE MENU STYLES
+   ========================================== */
 .main-header {
   background-color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
-  padding: 15px 0;
+  position: relative;
+  z-index: 100;
 }
 
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  height: 90px;
+  padding: 0 20px;
+}
+
+.logo-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logo {
-  max-height: 90px;
+  max-height: 80px;
   width: auto;
+  display: block;
 }
 
-.nav-bar {
+.menu-toggle {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
+  background: none;
+  border: 1.5px solid var(--muted-plum);
+  color: var(--dark-plum);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.menu-toggle:hover {
+  background-color: var(--muted-plum);
+  color: #ffffff;
+}
+
+/* Partial Slide-in Menu from the Left (Below Header) */
+.nav-bar {
+  position: absolute;
+  top: 100%; /* Sits right beneath the header line */
+  left: 0;
+  width: 280px; /* Controls how wide the menu panel is */
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 4px 10px 20px rgba(0, 0, 0, 0.08);
+  padding: 25px 20px;
+  z-index: 99;
+  
+  /* Slide-in animation states */
+  transform: translateX(-100%); /* Hidden off-screen to the left */
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Activated state: slides into view */
+.nav-bar.active {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-links {
   display: flex;
+  flex-direction: column;
   list-style: none;
-  gap: 12px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-/* Navigation Links with Clear Visible Borders */
 .nav-links a {
   text-decoration: none;
   color: var(--dark-plum);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 8px 16px;
-  border: 1.5px solid var(--muted-plum); /* Clear, distinct border */
+  padding: 12px 16px;
+  background-color: #fcfbfa;
+  border: 1.5px solid var(--muted-plum);
   border-radius: 4px;
   transition: all 0.3s ease;
+  display: block;
+  text-align: left;
 }
 
 .nav-links a:hover {
@@ -117,13 +177,15 @@ body {
 .btn-book-header {
   background-color: var(--muted-plum);
   color: #ffffff;
-  padding: 9px 20px;
+  padding: 12px 20px;
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 14px;
   border: 1.5px solid var(--muted-plum);
+  text-align: center;
+  display: block;
   transition: background-color 0.3s;
 }
 
@@ -131,7 +193,6 @@ body {
   background-color: #72556b;
   border-color: #72556b;
 }
-
 /* 3. HERO SECTION */
 .hero-section {
   position: relative;

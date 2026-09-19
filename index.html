@@ -29,24 +29,34 @@
     </div>
   </div>
 
-  <!-- 2. MAIN HEADER -->
-  <header class="main-header">
-    <div class="container header-content">
-      <div class="logo-container">
-        <img src="logo.jpg" alt="A Luxurious Experience Logo" class="logo">
-      </div>
-      <nav class="nav-bar">
-        <ul class="nav-links">
-          <li><a href="#index">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#conditions">What We Treat</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#book" class="btn-book-header">Bookings</a>
-      </nav>
+<!-- MAIN HEADER -->
+<header class="main-header">
+  <div class="container header-content">
+    
+    <!-- Toggle Button on the Left -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i> Menu
+    </button>
+
+    <!-- Logo in the Absolute Center -->
+    <div class="logo-container">
+      <img src="logo.jpg" alt="A Luxurious Experience Logo" class="logo">
     </div>
-  </header>
+
+    <!-- Navigation Panel (Slides in from the left, positioned right below the header) -->
+    <nav class="nav-bar" id="navBar">
+      <ul class="nav-links">
+        <li><a href="#index">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#conditions">What We Treat</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#book" class="btn-book-header">Bookings</a>
+    </nav>
+
+  </div>
+</header>
 
   <!-- 3. HERO SECTION -->
   <section class="hero-section" id="home">
@@ -160,6 +170,6 @@
       <p>&copy; 2026 A Luxurious Experience. All Rights Reserved.</p>
     </div>
   </footer>
-
+  <script src="script.js"></script>
 </body>
 </html>
