@@ -34,7 +34,7 @@
   <div class="container header-content">
     
     <!-- Toggle Button on the Left -->
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar">
       <i class="fa-solid fa-bars"></i> Menu
     </button>
 
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Navigation Panel (Slides in from the left, positioned right below the header) -->
-    <nav class="nav-bar" id="navBar">
+    <nav class="nav-bar" id="navBar" aria-hidden="true">
       <ul class="nav-links">
         <li><a href="#index">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -54,6 +54,7 @@
       </ul>
       <a href="#book" class="btn-book-header">Bookings</a>
     </nav>
+    <div class="nav-overlay" id="navOverlay" hidden></div>
 
   </div>
 </header>

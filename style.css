@@ -7,6 +7,8 @@
 }
 
 :root {
+  --top-bar-height: 37px;
+  --header-height: 90px;
   --sage-green: #849a80;
   --sage-light: #eaf0eb;
   --blush-pink: #d8a7b1;
@@ -118,27 +120,45 @@ body {
   color: #ffffff;
 }
 
-/* Partial Slide-in Menu from the Left (Below Header) */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(42, 36, 43, 0.35);
+  z-index: 98;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Full-height slide-in menu from the left (below header) */
 .nav-bar {
-  position: absolute;
-  top: 100%; /* Sits right beneath the header line */
+  position: fixed;
+  top: calc(var(--top-bar-height, 37px) + var(--header-height, 90px));
   left: 0;
-  width: 280px; /* Controls how wide the menu panel is */
+  width: min(320px, 100%);
+  height: calc(100dvh - var(--top-bar-height, 37px) - var(--header-height, 90px));
   background-color: #ffffff;
   border-right: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
   box-shadow: 4px 10px 20px rgba(0, 0, 0, 0.08);
-  padding: 25px 20px;
+  padding: 24px 20px;
   z-index: 99;
-  
-  /* Slide-in animation states */
-  transform: translateX(-100%); /* Hidden off-screen to the left */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(-100%);
   opacity: 0;
   visibility: hidden;
   transition: transform 0.35s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Activated state: slides into view */
 .nav-bar.active {
   transform: translateX(0);
   opacity: 1;
@@ -150,6 +170,7 @@ body {
   flex-direction: column;
   list-style: none;
   gap: 10px;
+  flex: 1;
   margin-bottom: 20px;
 }
 
@@ -263,7 +284,7 @@ body {
 }
 
 .btn-secondary {
-  background-color: rgba(132, 154, 128, 0.3);
+  background-color: var(--sage-green);
   color: #ffffff;
   border: 2px solid var(--sage-green);
   padding: 12px 28px;
@@ -287,8 +308,13 @@ body {
 
 .intro-section h2 {
   font-size: 2rem;
-  font-weight: 300;
-  margin-bottom: 15px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.intro-section p {
+  border: 1px solid var(--muted-plum);
+  padding: 18px 22px;
 }
 
 /* 5. TESTIMONIALS SECTION */
@@ -434,22 +460,22 @@ body {
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .header-content {
-    flex-direction: column;
-    gap: 15px;
+    height: 76px;
+  }
+
+  .logo {
+    max-height: 64px;
   }
 
   .nav-bar {
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
+    width: min(360px, 86vw);
+    padding: 20px 16px;
   }
 
-  .nav-links {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    width: 100%;
-    text-align: center;
+  .nav-links a,
+  .btn-book-header {
+    font-size: 15px;
+    padding: 14px 16px;
   }
 
   .hero-content h1 {
@@ -458,5 +484,17 @@ body {
 
   .hero-buttons {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-bar {
+    width: 100%;
+    border-right: none;
+  }
+
+  .menu-toggle {
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
