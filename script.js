@@ -1,4 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const serviceSearch = document.getElementById('serviceSearch');
+  const serviceSearchClear = document.getElementById('serviceSearchClear');
+  const serviceSearchStatus = document.getElementById('serviceSearchStatus');
+  const serviceCards = document.querySelectorAll('.service-card');
+  const serviceCategories = document.querySelectorAll('.service-category');
+
+  if (serviceSearch && serviceCards.length) {
+    const applySearch = () => {
+      const query = serviceSearch.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      serviceCards.forEach((card) => {
+        const name = card.querySelector('h3, h2')?.textContent.toLowerCase() || '';
+        const matches = !query || name.includes(query);
+        card.classList.toggle('is-hidden', !matches);
+        if (matches) visibleCount += 1;
+      });
+
+      serviceCategories.forEach((category) => {
+        const hasVisibleCard = Boolean(category.querySelector('.service-card:not(.is-hidden)'));
+        category.classList.toggle('is-hidden', !hasVisibleCard);
+      });
+
+      if (serviceSearchClear) serviceSearchClear.hidden = !query;
+
+      if (!serviceSearchStatus) return;
+      if (!query) {
+        serviceSearchStatus.textContent = '';
+      } else if (visibleCount === 0) {
+        serviceSearchStatus.textContent = 'No services match that name. Try another service name.';
+      } else {
+        serviceSearchStatus.textContent = `${visibleCount} service${visibleCount === 1 ? '' : 's'} found.`;
+      }
+    };
+
+    serviceSearch.addEventListener('input', applySearch);
+    serviceSearchClear?.addEventListener('click', () => {
+      serviceSearch.value = '';
+      serviceSearch.focus();
+      applySearch();
+    });
+  }
+
   const menuToggle = document.getElementById('menuToggle');
   const navBar = document.getElementById('navBar');
   const navOverlay = document.getElementById('navOverlay');
