@@ -50,6 +50,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 24px;
 }
 
 .top-contact a {
@@ -79,11 +83,14 @@ body {
 
 .header-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   height: 90px;
-  padding: 0 20px;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 24px;
 }
 
 .logo-container {
@@ -113,6 +120,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
+  margin-right: auto;
 }
 
 .menu-toggle:hover {
