@@ -612,16 +612,17 @@ body {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 40px;
   padding-bottom: 40px;
+  text-align: center;
 }
 
-.footer-logo {
-  max-height: 80px;
-  margin-bottom: 15px;
-  filter: brightness(0) invert(1);
+.footer-col {
+  flex: 1 1 200px;
+  max-width: 280px;
 }
 
 .footer-col h4 {
