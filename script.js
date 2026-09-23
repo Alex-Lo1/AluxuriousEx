@@ -1,4 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const voucherModal = document.getElementById('voucherModal');
+  const openVoucherModal = document.getElementById('openVoucherModal');
+  const voucherFrame = document.getElementById('voucherFrame');
+  const voucherUrl = 'https://aluxuriousexperience.gettimely.com/giftvouchers';
+
+  if (voucherModal && openVoucherModal && voucherFrame) {
+    const closeVoucherModal = () => {
+      voucherModal.hidden = true;
+      document.body.classList.remove('voucher-modal-open');
+    };
+
+    const showVoucherModal = () => {
+      if (!voucherFrame.getAttribute('src')) {
+        voucherFrame.src = voucherUrl;
+      }
+      voucherModal.hidden = false;
+      document.body.classList.add('voucher-modal-open');
+      voucherModal.querySelector('.voucher-modal-close')?.focus();
+    };
+
+    openVoucherModal.addEventListener('click', (event) => {
+      event.preventDefault();
+      showVoucherModal();
+    });
+
+    voucherModal.querySelectorAll('[data-close-voucher-modal]').forEach((el) => {
+      el.addEventListener('click', closeVoucherModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !voucherModal.hidden) closeVoucherModal();
+    });
+  }
+
   const serviceSearch = document.getElementById('serviceSearch');
   const serviceSearchClear = document.getElementById('serviceSearchClear');
   const serviceSearchStatus = document.getElementById('serviceSearchStatus');
