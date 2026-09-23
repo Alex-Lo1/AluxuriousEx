@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Vouchers - A Luxurious Experience</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="page-vouchers">
+
+  <div class="site-chrome">
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-contact">
+        <i class="fa-solid fa-phone"></i> Tel: <a href="tel:07445994304">07445 994304</a>
+      </div>
+      <div class="top-socials">
+      <a href="https://www.facebook.com/massagewellnesstherapies" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/a_luxurious_experience/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+    </div>
+  </div>
+
+<header class="main-header">
+  <div class="container header-content">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar">
+      <i class="fa-solid fa-bars"></i> Menu
+    </button>
+
+    <a href="index.html" class="logo-container">
+      <img src="logo.png" alt="A Luxurious Experience Logo" class="logo">
+    </a>
+
+    <nav class="nav-bar" id="navBar" aria-hidden="true">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="treatments.html">Services</a></li>
+        <li><a href="gift-vouchers.html" aria-current="page">Gift Vouchers</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="https://aluxuriousexperience.gettimely.com/" class="btn-book-header" target="_blank" rel="noopener noreferrer">Bookings</a>
+    </nav>
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+  </div>
+</header>
+  </div>
+
+  <section class="vouchers-hero" id="gift-vouchers">
+    <div class="vouchers-hero-overlay"></div>
+    <div class="vouchers-hero-content">
+      <h1 class="section-title">Gift Vouchers</h1>
+    </div>
+  </section>
+
+  <section class="vouchers-section">
+    <div class="container about-container">
+      <p class="about-intro">Give someone the gift of rest. A voucher from A Luxurious Experience can be used towards any of our treatments, packages, or add-ons, so they can choose the session that suits them.</p>
+      <p class="about-intro">Buy a voucher online through Timely, or get in touch if you would rather arrange one with us directly. When they are ready to book, they can mention the voucher or bring the details along to their appointment.</p>
+      <p class="about-intro">If you are unsure which amount to choose, have a look at our <a href="treatments.html">services</a>, or call <a href="tel:07445994304">07445 994304</a> and we will help you pick something thoughtful.</p>
+
+      <div class="voucher-actions">
+        <a href="https://aluxuriousexperience.gettimely.com/giftvouchers" class="btn-primary" id="openVoucherModal">Buy a Gift Voucher</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="voucher-modal" id="voucherModal" hidden>
+    <div class="voucher-modal-backdrop" data-close-voucher-modal></div>
+    <div class="voucher-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="voucherModalTitle">
+      <h2 id="voucherModalTitle" class="visually-hidden">Buy a gift voucher</h2>
+      <button type="button" class="voucher-modal-close" data-close-voucher-modal aria-label="Close gift voucher window">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <iframe id="voucherFrame" title="Buy a gift voucher from A Luxurious Experience"></iframe>
+    </div>
+  </div>
+
+  <footer class="main-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p>Mon/Tue/Thu: 17:00 - 21:00</p>
+        <p>Sat/Sun: 11:00 - 18:00</p>
+        <p>Wed/Fri: Closed</p>
+      </div>
+      <div class="footer-col">
+        <h4>Location</h4>
+        <p>117 Cregagh Road, Castlereagh</p>
+        <p>Belfast</p>
+        <p>Tel: 07445 994304</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 A Luxurious Experience. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

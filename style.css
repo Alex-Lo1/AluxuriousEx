@@ -473,11 +473,6 @@ body {
   flex: 0;
 }
 
-.page-treatments .services-section .section-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-}
-
 .services-intro {
   max-width: 720px;
   margin: 0 auto 28px;
@@ -621,8 +616,7 @@ body {
 }
 
 .footer-col {
-  flex: 1 1 200px;
-  max-width: 280px;
+  flex: 0 1 280px;
 }
 
 .footer-col h4 {
@@ -693,10 +687,6 @@ body {
     font-size: 2.2rem;
   }
 
-  .page-treatments .services-section .section-title {
-    font-size: 2.3rem;
-  }
-
   .services-intro {
     font-size: 1.05rem;
     padding: 16px 18px;
@@ -747,18 +737,77 @@ body {
   }
 }
 
-.page-about .about-section .section-title {
-  font-size: 2.8rem;
-  font-weight: 700;
+.about-hero,
+.services-hero,
+.vouchers-hero {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #cfc8cc;
 }
 
-.about-section {
+.about-hero {
+  background-image: url('aboutHeader.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.services-hero {
+  background-image: url('servicesPhoto.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.vouchers-hero {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(42, 36, 43, 0.04),
+    rgba(42, 36, 43, 0.04) 16px,
+    rgba(255, 255, 255, 0.18) 16px,
+    rgba(255, 255, 255, 0.18) 32px
+  );
+}
+
+.about-hero-overlay,
+.services-hero-overlay,
+.vouchers-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(42, 36, 43, 0.32);
+}
+
+.about-hero-content,
+.services-hero-content,
+.vouchers-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.about-hero .section-title,
+.services-hero .section-title,
+.vouchers-hero .section-title {
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 18px rgba(42, 36, 43, 0.45);
+}
+
+.about-section,
+.vouchers-section {
   padding: 70px 0;
   background-color: var(--off-white);
 }
 
 .about-container {
-  max-width: 850px;
+  max-width: 1000px;
 }
 
 .about-intro {
@@ -768,6 +817,105 @@ body {
   font-size: 1.05rem;
   line-height: 1.7;
   background-color: #ffffff;
+}
+
+.about-intro a {
+  color: var(--muted-plum);
+  font-weight: 600;
+}
+
+.voucher-actions {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.voucher-actions .btn-primary {
+  display: inline-block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.voucher-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.voucher-modal[hidden] {
+  display: none;
+}
+
+.voucher-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 36, 43, 0.65);
+}
+
+.voucher-modal-dialog {
+  position: relative;
+  width: min(920px, 100%);
+  height: min(780px, calc(100vh - 48px));
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(42, 36, 43, 0.35);
+}
+
+.voucher-modal-dialog iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #ffffff;
+}
+
+.voucher-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--dark-plum);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.voucher-modal-close:hover {
+  background: var(--muted-plum);
+}
+
+body.voucher-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .voucher-modal {
+    padding: 0;
+  }
+
+  .voucher-modal-dialog {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
 }
 
 .about-notice {
@@ -780,12 +928,38 @@ body {
   background-color: var(--sage-light);
 }
 
+.about-owner-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 48px;
+}
+
+.about-owner-photo {
+  position: relative;
+  min-height: 280px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #cfc8cc;
+}
+
+.about-owner-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  display: block;
+}
+
 .about-owner {
   background-color: #ffffff;
   padding: 32px 28px;
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  margin-bottom: 48px;
+  margin-bottom: 0;
 }
 
 .about-owner h2 {
@@ -837,7 +1011,24 @@ body {
 }
 
 @media (max-width: 768px) {
-  .page-about .about-section .section-title {
-    font-size: 2.3rem;
+  .about-hero,
+  .services-hero,
+  .vouchers-hero {
+    min-height: 200px;
+  }
+
+  .about-hero .section-title,
+  .services-hero .section-title,
+  .vouchers-hero .section-title {
+    font-size: 2.2rem;
+    letter-spacing: 0.12em;
+  }
+
+  .about-owner-row {
+    grid-template-columns: 1fr;
+  }
+
+  .about-owner-photo {
+    min-height: 220px;
   }
 }
