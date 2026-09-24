@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a treatment - A Luxurious Experience</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="page-booking">
+
+  <div class="site-chrome">
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-contact">
+        <i class="fa-solid fa-phone"></i> Tel: <a href="tel:07445994304">07445 994304</a>
+      </div>
+      <div class="top-socials">
+      <a href="https://www.facebook.com/massagewellnesstherapies" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/a_luxurious_experience/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+    </div>
+  </div>
+
+<header class="main-header">
+  <div class="container header-content">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar">
+      <i class="fa-solid fa-bars"></i> Menu
+    </button>
+
+    <a href="index.html" class="logo-container">
+      <img src="images/logo.png" alt="A Luxurious Experience Logo" class="logo">
+    </a>
+
+    <nav class="nav-bar" id="navBar" aria-hidden="true">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="treatments.html">Services</a></li>
+        <li><a href="gift-vouchers.html">Gift Vouchers</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="book.html" class="btn-book-header" aria-current="page">Bookings</a>
+    </nav>
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+  </div>
+</header>
+  </div>
+
+  <section class="booking-section">
+    <div class="container booking-wrap">
+      <h1 class="section-title">Book a treatment</h1>
+      <p class="booking-intro">Choose a treatment, then a date and time that is still free. No account is needed.</p>
+
+      <ol class="booking-steps" id="bookingSteps">
+        <li data-step="treatment" class="is-current">Treatment</li>
+        <li data-step="date">Date</li>
+        <li data-step="time">Time</li>
+        <li data-step="details">Your details</li>
+        <li data-step="review">Review</li>
+      </ol>
+
+      <p class="booking-error" id="bookingError" role="alert" hidden></p>
+
+      <div id="bookingFlow">
+        <section class="booking-panel" data-panel="treatment">
+          <h2>Choose a treatment</h2>
+          <div class="service-search">
+            <label for="serviceSearch">Find a service</label>
+            <div class="service-search-row">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input type="search" id="serviceSearch" placeholder="Search by service name" autocomplete="off">
+              <button type="button" class="service-search-clear" id="serviceSearchClear" hidden>Clear</button>
+            </div>
+            <p class="service-search-status" id="serviceSearchStatus" aria-live="polite"></p>
+          </div>
+          <div class="booking-service-list" id="serviceList">
+            <p class="booking-muted">Loading treatments…</p>
+          </div>
+        </section>
+
+        <section class="booking-panel" data-panel="date" hidden>
+          <h2>Choose a date</h2>
+          <p class="booking-selection" id="dateSelection"></p>
+          <div class="calendar">
+            <div class="calendar-nav">
+              <button type="button" id="calPrev" aria-label="Previous month">‹</button>
+              <h3 id="calLabel"></h3>
+              <button type="button" id="calNext" aria-label="Next month">›</button>
+            </div>
+            <div class="calendar-weekdays" aria-hidden="true">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+            <div class="calendar-grid" id="calGrid"></div>
+          </div>
+          <div class="booking-actions">
+            <button type="button" class="btn-secondary" data-goto="treatment">Back</button>
+          </div>
+        </section>
+
+        <section class="booking-panel" data-panel="time" hidden>
+          <h2>Choose a time</h2>
+          <p class="booking-selection" id="timeSelection"></p>
+          <div class="time-slots" id="timeSlots"></div>
+          <div class="booking-actions">
+            <button type="button" class="btn-secondary" data-goto="date">Back</button>
+          </div>
+        </section>
+
+        <section class="booking-panel" data-panel="details" hidden>
+          <h2>Your details</h2>
+          <p class="booking-selection" id="detailsSelection"></p>
+          <form id="detailsForm" novalidate>
+            <label for="customerName">Full name</label>
+            <input id="customerName" name="name" type="text" autocomplete="name" required maxlength="80" aria-describedby="customerNameError">
+            <p class="field-error" id="customerNameError" role="alert" hidden></p>
+
+            <label for="customerEmail">Email address</label>
+            <input id="customerEmail" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="customerEmailError">
+            <p class="field-error" id="customerEmailError" role="alert" hidden></p>
+
+            <label for="customerPhone">Phone number</label>
+            <input id="customerPhone" name="phone" type="tel" autocomplete="tel" required maxlength="30" aria-describedby="customerPhoneError">
+            <p class="field-error" id="customerPhoneError" role="alert" hidden></p>
+
+            <label for="giftCode">Gift code <span>(optional)</span></label>
+            <input id="giftCode" name="giftCode" type="text" maxlength="20" placeholder="GIFT-XXXXXXXX" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="giftCodeError">
+            <p class="field-error" id="giftCodeError" role="alert" hidden></p>
+
+            <label for="customerNotes">Notes <span>(optional)</span></label>
+            <textarea id="customerNotes" name="notes" rows="4" maxlength="1000" placeholder="Anything we should know before your visit" aria-describedby="customerNotesError"></textarea>
+            <p class="field-error" id="customerNotesError" role="alert" hidden></p>
+
+            <div class="booking-actions">
+              <button type="button" class="btn-secondary" data-goto="time">Back</button>
+              <button type="submit" class="btn-primary">Review booking</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="booking-panel" data-panel="review" hidden>
+          <h2>Review your booking</h2>
+          <dl class="booking-summary" id="reviewSummary"></dl>
+          <div class="booking-actions">
+            <button type="button" class="btn-secondary" data-goto="details">Back</button>
+            <button type="button" class="btn-primary" id="confirmBooking">Confirm booking</button>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="voucher-modal" id="bookingConfirmed" hidden>
+    <div class="voucher-modal-backdrop"></div>
+    <div class="voucher-modal-dialog voucher-ready-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingConfirmedTitle">
+      <h2 id="bookingConfirmedTitle">Your booking is confirmed</h2>
+      <p>We have saved this appointment. Please keep your reference number.</p>
+      <p class="voucher-result-code" id="bookingReference"></p>
+      <p class="booking-confirmed-detail" id="bookingConfirmedDetail"></p>
+      <a class="btn-primary booking-home" href="index.html">Home</a>
+    </div>
+  </div>
+
+  <footer class="main-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p>Mon/Tue/Thu: 17:00 - 21:00</p>
+        <p>Sat/Sun: 11:00 - 18:00</p>
+        <p>Wed/Fri: Closed</p>
+      </div>
+      <div class="footer-col">
+        <h4>Location</h4>
+        <p>117 Cregagh Road, Castlereagh</p>
+        <p>Belfast</p>
+        <p>Tel: 07445 994304</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 A Luxurious Experience. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

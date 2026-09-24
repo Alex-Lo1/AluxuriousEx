@@ -1,35 +1,125 @@
 document.addEventListener('DOMContentLoaded', () => {
   const voucherModal = document.getElementById('voucherModal');
   const openVoucherModal = document.getElementById('openVoucherModal');
-  const voucherFrame = document.getElementById('voucherFrame');
-  const voucherUrl = 'https://aluxuriousexperience.gettimely.com/giftvouchers';
 
-  if (voucherModal && openVoucherModal && voucherFrame) {
+  if (voucherModal && openVoucherModal) {
     const closeVoucherModal = () => {
       voucherModal.hidden = true;
       document.body.classList.remove('voucher-modal-open');
     };
 
-    const showVoucherModal = () => {
-      if (!voucherFrame.getAttribute('src')) {
-        voucherFrame.src = voucherUrl;
+    const voucherForm = document.getElementById('voucherForm');
+    const voucherReady = document.getElementById('voucherReady');
+    const voucherError = document.getElementById('voucherError');
+
+    const closeVoucherReady = () => {
+      if (voucherReady) voucherReady.hidden = true;
+      if (voucherModal.hidden) document.body.classList.remove('voucher-modal-open');
+    };
+
+    const resetVoucherForm = () => {
+      voucherForm?.reset();
+      if (voucherError) {
+        voucherError.hidden = true;
+        voucherError.textContent = '';
       }
+      const voucherMinNote = document.getElementById('voucherMinNote');
+      if (voucherMinNote) voucherMinNote.hidden = true;
+      if (voucherEmailLabel) voucherEmailLabel.textContent = 'Your email';
+    };
+
+    openVoucherModal.addEventListener('click', () => {
+      resetVoucherForm();
       voucherModal.hidden = false;
       document.body.classList.add('voucher-modal-open');
       voucherModal.querySelector('.voucher-modal-close')?.focus();
+    });
+
+    const voucherPrice = document.getElementById('voucherPrice');
+    const voucherCustom = document.getElementById('voucherCustom');
+
+    voucherPrice?.addEventListener('change', () => {
+      if (voucherPrice.value && voucherCustom) voucherCustom.value = '';
+    });
+
+    voucherCustom?.addEventListener('input', () => {
+      if (voucherCustom.value && voucherPrice) voucherPrice.value = '';
+      const amount = Number(voucherCustom.value);
+      const tooLow = voucherCustom.value !== '' && amount < 15;
+      const voucherMinNote = document.getElementById('voucherMinNote');
+      if (voucherMinNote) voucherMinNote.hidden = !tooLow;
+      voucherCustom.setCustomValidity(tooLow ? 'The minimum amount is £15.' : '');
+    });
+
+    const voucherEmailLabel = document.getElementById('voucherEmailLabel');
+    voucherModal.querySelectorAll('input[name="voucherSend"]').forEach((choice) => {
+      choice.addEventListener('change', () => {
+        if (!voucherEmailLabel) return;
+        voucherEmailLabel.textContent = choice.value === 'recipient'
+          ? "Recipient's email"
+          : 'Your email';
+      });
+    });
+
+    const showVoucherError = (message) => {
+      if (!voucherError) return;
+      voucherError.hidden = !message;
+      voucherError.textContent = message || '';
     };
 
-    openVoucherModal.addEventListener('click', (event) => {
-      event.preventDefault();
-      showVoucherModal();
+    document.querySelector('.voucher-submit')?.addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      const sendTo = voucherForm.querySelector('input[name="voucherSend"]:checked')?.value || 'self';
+      showVoucherError('');
+      button.disabled = true;
+      try {
+        const response = await fetch('/api/gift-vouchers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('voucherName')?.value || '',
+            email: document.getElementById('voucherEmail')?.value || '',
+            sendTo,
+            amount: voucherPrice?.value || '',
+            customAmount: voucherCustom?.value || '',
+            message: document.getElementById('voucherMessage')?.value || '',
+          }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          showVoucherError(data.error || 'The voucher could not be created.');
+          return;
+        }
+        document.getElementById('voucherResultCode').textContent = data.code;
+        const pounds = Number(data.amount);
+        document.getElementById('voucherResultAmount').textContent = Number.isInteger(pounds)
+          ? `£${pounds}`
+          : `£${pounds.toFixed(2)}`;
+        closeVoucherModal();
+        if (voucherReady) {
+          voucherReady.hidden = false;
+          document.body.classList.add('voucher-modal-open');
+          voucherReady.querySelector('.voucher-modal-close')?.focus();
+        }
+      } catch (error) {
+        showVoucherError('The voucher could not be created. Please try again.');
+      } finally {
+        button.disabled = false;
+      }
     });
 
     voucherModal.querySelectorAll('[data-close-voucher-modal]').forEach((el) => {
       el.addEventListener('click', closeVoucherModal);
     });
 
+    voucherReady?.querySelectorAll('[data-close-voucher-ready]').forEach((el) => {
+      el.addEventListener('click', closeVoucherReady);
+    });
+
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !voucherModal.hidden) closeVoucherModal();
+      if (event.key !== 'Escape') return;
+      if (voucherReady && !voucherReady.hidden) closeVoucherReady();
+      else if (!voucherModal.hidden) closeVoucherModal();
     });
   }
 
