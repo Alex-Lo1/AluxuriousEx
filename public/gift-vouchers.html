@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Vouchers - A Luxurious Experience</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="page-vouchers">
+
+  <div class="site-chrome">
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-contact">
+        <i class="fa-solid fa-phone"></i> Tel: <a href="tel:07445994304">07445 994304</a>
+      </div>
+      <div class="top-socials">
+      <a href="https://www.facebook.com/massagewellnesstherapies" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/a_luxurious_experience/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+    </div>
+  </div>
+
+<header class="main-header">
+  <div class="container header-content">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar">
+      <i class="fa-solid fa-bars"></i> Menu
+    </button>
+
+    <a href="index.html" class="logo-container">
+      <img src="images/logo.png" alt="A Luxurious Experience Logo" class="logo">
+    </a>
+
+    <nav class="nav-bar" id="navBar" aria-hidden="true">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="treatments.html">Services</a></li>
+        <li><a href="gift-vouchers.html" aria-current="page">Gift Vouchers</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="book.html" class="btn-book-header">Bookings</a>
+    </nav>
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+  </div>
+</header>
+  </div>
+
+  <section class="vouchers-hero" id="gift-vouchers">
+    <div class="vouchers-hero-overlay"></div>
+    <div class="vouchers-hero-content">
+      <h1 class="section-title">Gift Vouchers</h1>
+    </div>
+  </section>
+
+  <section class="vouchers-section">
+    <div class="container about-container">
+      <p class="about-intro">A gift voucher is a simple way to give someone time to slow down. They can put it towards any treatment in the studio, from a single session to a longer package, and choose what they would like when they are ready.</p>
+      <p class="about-intro">Choose an amount and who should receive it. We email a gift code straight away. That code can be entered when booking a treatment, and any amount left over can be used again.</p>
+      <p class="about-intro">If you are not sure what to choose, have a look through our <a href="treatments.html">services</a>, or call <a href="tel:07445994304">07445 994304</a> and we will help you pick something that fits.</p>
+
+      <div class="voucher-actions">
+        <button type="button" class="btn-primary" id="openVoucherModal">Purchase a voucher</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="voucher-modal" id="voucherModal" hidden>
+    <div class="voucher-modal-backdrop" data-close-voucher-modal></div>
+    <div class="voucher-modal-dialog" role="dialog" aria-modal="true" aria-label="Gift voucher">
+      <button type="button" class="voucher-modal-close" data-close-voucher-modal aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <form class="voucher-form" id="voucherForm">
+        <p class="voucher-error" id="voucherError" role="alert" hidden></p>
+        <label for="voucherName">Your name</label>
+        <input type="text" id="voucherName" name="voucherName" autocomplete="name" maxlength="80">
+        <label for="voucherPrice">Gift voucher price</label>
+        <select id="voucherPrice" name="voucherPrice">
+          <option value="">Choose a price</option>
+          <option value="15">£15</option>
+          <option value="20">£20</option>
+          <option value="25">£25</option>
+          <option value="30">£30</option>
+          <option value="35">£35</option>
+          <option value="40">£40</option>
+          <option value="45">£45</option>
+          <option value="50">£50</option>
+        </select>
+        <label for="voucherCustom">Custom amount</label>
+        <div class="voucher-custom">
+          <span aria-hidden="true">£</span>
+          <input type="number" id="voucherCustom" name="voucherCustom" min="15" step="1" inputmode="decimal" placeholder="Minimum £15">
+        </div>
+        <p class="voucher-min-note" id="voucherMinNote" hidden>The minimum amount is £15.</p>
+        <fieldset class="voucher-send">
+          <legend>Send the voucher</legend>
+          <label class="voucher-choice">
+            <input type="radio" name="voucherSend" value="self" checked>
+            <span>Email it to me</span>
+          </label>
+          <label class="voucher-choice">
+            <input type="radio" name="voucherSend" value="recipient">
+            <span>Email it to the recipient</span>
+          </label>
+        </fieldset>
+        <label for="voucherEmail" id="voucherEmailLabel">Your email</label>
+        <input type="email" id="voucherEmail" name="voucherEmail" placeholder="name@email.com" autocomplete="email">
+        <label for="voucherMessage">Message <span class="voucher-optional">(optional)</span></label>
+        <textarea id="voucherMessage" name="voucherMessage" rows="3" placeholder="Add a note for the voucher"></textarea>
+        <button type="button" class="btn-primary voucher-submit">Purchase</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="voucher-modal" id="voucherReady" hidden>
+    <div class="voucher-modal-backdrop" data-close-voucher-ready></div>
+    <div class="voucher-modal-dialog voucher-ready-dialog" role="dialog" aria-modal="true" aria-labelledby="voucherReadyTitle">
+      <button type="button" class="voucher-modal-close" data-close-voucher-ready aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="voucher-result" id="voucherResult">
+        <h2 id="voucherReadyTitle">Your gift voucher is ready</h2>
+        <p>The gift code has been emailed. It can be entered when booking a treatment.</p>
+        <p class="voucher-result-code" id="voucherResultCode"></p>
+        <p class="voucher-result-amount" id="voucherResultAmount"></p>
+        <button type="button" class="btn-primary" data-close-voucher-ready>Done</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p>Mon/Tue/Thu: 17:00 - 21:00</p>
+        <p>Sat/Sun: 11:00 - 18:00</p>
+        <p>Wed/Fri: Closed</p>
+      </div>
+      <div class="footer-col">
+        <h4>Location</h4>
+        <p>117 Cregagh Road, Castlereagh</p>
+        <p>Belfast</p>
+        <p>Tel: 07445 994304</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 A Luxurious Experience. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
