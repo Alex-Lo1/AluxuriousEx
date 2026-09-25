@@ -338,8 +338,8 @@ async function start() {
 
   const port = Number(process.env.PORT || 8080);
   const app = createApp();
-  const server = app.listen(port, '127.0.0.1', () => {
-    console.log(`A Luxurious Experience is running at http://127.0.0.1:${port}/`);
+  const server = app.listen(port, '0.0.0.0', () => {
+    console.log(`A Luxurious Experience is running on port ${port}`);
   });
   server.on('error', (error) => {
     console.error(error.message);
